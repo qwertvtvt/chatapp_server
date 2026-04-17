@@ -1,0 +1,19 @@
+node_modules/
+package-lock.json
+.env
+
+# SQLite DBファイル
+*.sqlite
+*.sqlite3
+*.db
+
+# Knex migrationロック
+knexfile.js.lock
+
+# ログ
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OSゴミ
+.DS_Store
