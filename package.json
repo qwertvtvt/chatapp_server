@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/qwertvtvt/chatapp_server#readme",
   "dependencies": {
+    "body-parser": "^2.2.2",
     "express": "^5.2.1",
     "knex": "^3.2.9",
     "socket.io": "^4.8.3",

@@ -4,12 +4,6 @@
  */
 exports.up = function(knex) {
   return knex.schema
-    // users
-    .createTable('users', table => {
-      table.string('userId', 10).primary();
-      table.text('username').notNullable();
-    })
-
     // rooms
     .createTable('rooms', table => {
       table.string('roomId', 5).primary();
@@ -21,8 +15,9 @@ exports.up = function(knex) {
     .createTable('chats', table => {
       table.increments('id'); // AUTO INCREMENT
       table.string('roomId', 5).notNullable();
-      table.string('userId', 10).notNullable();
+      table.text('username').notNullable();
       table.text('message').notNullable();
+      table.boolean('system').notNullable();
       table.bigInteger('post_at').notNullable();
 
       // 外部キー
@@ -30,13 +25,8 @@ exports.up = function(knex) {
         .references('rooms.roomId')
         .onDelete('CASCADE');
 
-      table.foreign('userId')
-        .references('users.userId')
-        .onDelete('CASCADE');
-
       // インデックス
       table.index('roomId');
-      table.index('userId');
     });
 };
 

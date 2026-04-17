@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>テスト画面</title>
+</head>
+<body>
+    <button id="test">API疎通テスト</button><br>
+    <pre id="test_result"></pre>
+    <hr>
+    <button id="rooms">ルーム一覧取得テスト</button><br>
+    <pre id="rooms_result"></pre>
+    <hr>
+    <button id="create_room">ルーム作成テスト</button><br>
+    <pre id="create_room_result"></pre>
+
+    <script>
+        document.getElementById("test").addEventListener("click", async function(e) {
+            const data = await (await fetch("/test")).json();
+            console.log(data);
+            document.getElementById("test_result").textContent = JSON.stringify(data);
+        });
+
+        document.getElementById("rooms").addEventListener("click", async function(e) {
+            const data = await (await fetch("/rooms")).json();
+            console.log(data);
+            document.getElementById("rooms_result").textContent = JSON.stringify(data);
+        });
+
+        document.getElementById("create_room").addEventListener("click", async function(e) {
+            const data = await (
+                await fetch("/create_room", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        name: "test"
+                    })
+                })
+            ).json();
+            console.log(data);
+            document.getElementById("create_room_result").textContent = JSON.stringify(data);
+        })
+    </script>
+</body>
+</html>
