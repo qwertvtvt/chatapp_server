@@ -17,7 +17,7 @@ exports.up = function(knex) {
       table.string('roomId', 5).notNullable();
       table.text('username').notNullable();
       table.text('message').notNullable();
-      table.boolean('system').notNullable();
+      table.integer('system').notNullable();
       table.bigInteger('post_at').notNullable();
 
       // 外部キー
@@ -37,6 +37,5 @@ exports.up = function(knex) {
 exports.down = function(knex) {
   return knex.schema
     .dropTableIfExists('chats')
-    .dropTableIfExists('rooms')
-    .dropTableIfExists('users');
+    .dropTableIfExists('rooms');
 };
