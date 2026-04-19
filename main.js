@@ -36,10 +36,31 @@ io.on("connection", function(socket) {
             system: true,
             post_at: Date.now()
         }).then(function() {
-            socket.to(roomId).emit("message", {
+            io.to(roomId).emit("message", {
+                roomId: roomId,
                 system: true,
                 username: "System",
                 message: `${username}が参加しました`,
+                post_at: Date.now()
+            });
+        });
+    });
+
+    socket.on("leave_room", ({ roomId, username }) => {
+        socket.leave(roomId);
+
+        knex("chats").insert({
+            roomId,
+            username: "System",
+            message: `${username}が退出しました`,
+            system: true,
+            post_at: Date.now()
+        }).then(() => {
+            io.to(roomId).emit("message", {
+                roomId,
+                system: true,
+                username: "System",
+                message: `${username}が退出しました`,
                 post_at: Date.now()
             });
         });
@@ -54,6 +75,7 @@ io.on("connection", function(socket) {
             post_at: Date.now()
         }).then(function() {
             io.to(roomId).emit("message", {
+                roomId: roomId,
                 system: false,
                 username,
                 message,
