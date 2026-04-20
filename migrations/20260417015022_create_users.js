@@ -9,6 +9,7 @@ exports.up = function(knex) {
       table.string('roomId', 5).primary();
       table.text('roomname').notNullable();
       table.bigInteger('created_at').notNullable();
+      table.bigInteger('updated_at').notNullable();
     })
 
     // chats

@@ -8,7 +8,7 @@ router.get("/rooms", async function(req, res) {
     const offset = (page - 1) * limit;
 
     const rooms = await knex("rooms").select("*")
-                    .orderBy("created_at", "desc")
+                    .orderBy("updated_at", "desc")
                     .limit(limit)
                     .offset(offset);
     

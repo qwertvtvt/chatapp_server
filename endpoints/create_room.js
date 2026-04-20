@@ -12,11 +12,13 @@ function generateId(length) {
 }
 
 router.post("/create_room", async function(req, res) {
+    const now = Date.now();
     const roomId = generateId(5);
     const roomname = req.body.name;
-    const created_at = Date.now();
+    const created_at = now;
+    const updated_at = now;
     knex("rooms").insert({
-        roomId, roomname, created_at
+        roomId, roomname, created_at, updated_at
     }).then(function() {
         res.setHeader("Content-Type", "application/json");
         res.send({
